@@ -16,13 +16,8 @@ class Employee {
     }
 
     // setup method to getID
-    getID() {
-        if (!this.id) {
-            console.log("Please provide a ID number");
-        } else {
-            return this.id;
-        } 
-
+    getId() {
+        return this.id;
     }
 
     // set up method to getEmail
@@ -37,9 +32,12 @@ class Employee {
 
     // set up method to getRole
     getRole(){
-        // this will return that the individual is an employee
+        return "Employee";
 
     }
 }
+
+// var test = new Employee("Patrick", "1234", "Email")
+// console.log(test)
 
 module.exports = Employee;

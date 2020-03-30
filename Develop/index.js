@@ -4,18 +4,13 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-​
+
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-​
-const render = require("./lib/htmlRenderer");
-​
-​
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
 
-// empty array to hold the team member data
-const teamMembers = [];​
+const render = require("./lib/htmlRenderer");
+
+const teamMembers = [];
 
 const questions = [
     {
@@ -64,21 +59,57 @@ const questions = [
         name: "internSchool",
     },
 
-]
+];
 
-console.log(questions)
+// console.log(questions)
 
 function createTeamMember () {
 inquirer
   .prompt(questions)
   .then(function (answers) {
 
-    // take the answer data and then create a new Employee
 
-    // take the new Employee and push to the teamMember array
+    // take the answer data and then create a new Employee based on the role answer
+    switch(answers.role) {
+        case "manager":
+            const manager = new Manager(answers.name, parseInt(answers.employeeIDAnswer), answers.employeeEmailAnswer, answers.officeNumberAnswer);
+           teamMembers.push(manager);
+           break
 
-    // then loop back through the questions to creat additional team members
-    // some way to stop the loop
+        case "engineer":
+            const engineer = new Engineer(answers.name, parseInt(answers.employeeIDAnswer), answers.employeeEmailAnswer, answers.gitHubAnswer);
+            teamMembers.push(engineer);
+            break
+
+        case "intern":
+            const intern = new Intern(answers.name, parseInt(answers.employeeIDAnswer), answers.employeeEmailAnswer, answers.internSchool);
+            teamMembers.push(intern);
+            break
+    }
+    console.log(teamMembers);
+    addAnother();
+
+    // need to loop through the inquirer prompt to add new users
+
+});
+
+function addAnother () {
+    inquirer
+    .prompt([
+        {
+            type: "confirm",
+            message: "Do you wish to create another team member?",
+            name: "addMemberConfirm",
+        }
+    ])
+    .then (function (answers) {
+        if (answers.addMemberConfirm) {
+            createTeamMember();
+        } else {
+            return teamMembers;
+        }
+    })
+}
 
 //   .catch(error => {
 //     if(error.isTtyError) {
@@ -86,27 +117,10 @@ inquirer
 //     } else {
 //       // Something else when wrong
 //     }
-  });
+
 }
 
 
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-​
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-​
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-​
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an 
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work!```
 createTeamMember();
+
+console.log("Last console.log:", teamMembers);

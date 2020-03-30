@@ -2,14 +2,15 @@
 const Employee = require("./Employee");
 
 class Engineer extends Employee {
-    constructor(gitHub) {
+    constructor(name, id, email, gitHub) {
         // inherit name, id, and email from Employee superclass
-        this.gitHub = gitHub;
         
-        super(name, id, email)
+        
+        super(name, id, email);
+        this.gitHub = gitHub;
 
     }
-    getGitHub(){
+    getGitHub() {
         if (!this.gitHub) {
             console.log("Please enter a GitHub username");
         } else {
@@ -19,7 +20,7 @@ class Engineer extends Employee {
     }
 
     getRole() {
-        // returns Engineer
+        return "Engineer";
     }
 }
 
@@ -28,4 +29,4 @@ class Engineer extends Employee {
 
 
 
-module.exports = Employee;
+module.exports = Engineer;
