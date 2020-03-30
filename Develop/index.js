@@ -86,7 +86,7 @@ inquirer
             teamMembers.push(intern);
             break
     }
-    console.log(teamMembers);
+
     addAnother();
 
     // need to loop through the inquirer prompt to add new users
@@ -106,10 +106,21 @@ function addAnother () {
         if (answers.addMemberConfirm) {
             createTeamMember();
         } else {
-            return teamMembers;
+            createHTML(teamMembers);
         }
     })
 }
+
+function createHTML (teamMembers) {
+    if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR);
+    }
+    fs.writeFile(outputPath, render(teamMembers), function (err) {
+        if (err) throw err;
+        console.log("File created successfully");
+    })
+}
+
 
 //   .catch(error => {
 //     if(error.isTtyError) {
@@ -123,4 +134,3 @@ function addAnother () {
 
 createTeamMember();
 
-console.log("Last console.log:", teamMembers);
