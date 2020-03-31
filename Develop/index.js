@@ -96,8 +96,6 @@ inquirer
 
     addAnother();
 
-    // need to loop through the inquirer prompt to add new users
-
 });
 
 function addAnother () {
@@ -127,14 +125,6 @@ function createHTML (teamMembers) {
         console.log("File created successfully");
     })
 }
-
-
-//   .catch(error => {
-//     if(error.isTtyError) {
-//       // Prompt couldn't be rendered in the current environment
-//     } else {
-//       // Something else when wrong
-//     }
 
 }
 
