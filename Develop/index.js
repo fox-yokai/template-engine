@@ -27,6 +27,13 @@ const questions = [
         type: "input",
         message: "Enter the employee's email",
         name: "employeeEmailAnswer",
+        validate: function(value) {
+            var pass = value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+            if (pass) {
+                return true;
+            }
+            return "Please enter a valid email address"
+        },
     },
     {
         type: "rawlist",
