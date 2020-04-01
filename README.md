@@ -6,6 +6,10 @@ After downloading the files enter `node .index.js` in the terminal.
 At the prompt Enter the user's name, the employee ID , the email address. Then it will prompt for additional information depending on their role: manager - office number; engineer - GitHub username; intern - name of their school.
 
 When the last team member has been entered the applicaiton will generate ./output/team.html
+
+## Demo
+![management template engine](./Develop/assets/template-engine.gif)
+
 ## Highlights
 This code highlight is to generate the team.html file.
 ```
